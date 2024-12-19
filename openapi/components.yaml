@@ -1,0 +1,89 @@
+components:
+  schemas:
+    LoginBody:
+      type: object
+      properties:
+        email:
+          type: string
+          example: lynguyenngocduy123@gmail.com
+        password:
+          type: string
+          example: Duy123@
+    SuccessAuthentication:
+      type: object
+      properties:
+        access_token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDAwMTRhNjdlMDY2MTljMzQzZDRkIiwidmVyaWZ5IjoxLCJ0b2tlbl90eXBlIjowLCJpYXQiOjE3MzM5OTgyNDMsImV4cCI6MTczNDA4NDY0M30.VDg0cFjf59CrYUBfaI9dCyU8Bi0jkKze8b9CdP6m9tc
+        refresh_token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjc1NDAwMTRhNjdlMDY2MTljMzQzZDRkIiwidmVyaWZ5IjoxLCJ0b2tlbl90eXBlIjoxLCJpYXQiOjE3MzM5OTgyNDMsImV4cCI6MTc0MjYzODI0M30.ebFG38XjQQOXgZziZ8041I-5-KvvPkxwauUZuyCE7Dk
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: MongoId
+          example: '67540014a67e06619c343d4d'
+        username:
+          type: string
+          example: 'duy123'
+        name:
+          type: string
+          example: 'duy'
+        email:
+          type: string
+          example: 'duydeptrai123494@gmail.com'
+        date_of_birth:
+          type: string
+          format: ISO8601
+          example: 2024-11-23T10:54:49.279Z
+        bio:
+          type: string
+          example: ''
+        avatar:
+          type: string
+          example: 'http:localhost:3000/images/avatar.jpg'
+        cover_photo:
+          type: string
+          example: 'http:localhost:3000/images/avatar.jpg'
+        verify:
+          $ref: '#/components/schemas/UserVerifyStatus'
+        tweeter_circle:
+          type: array
+          items:
+            type: string
+            format: MongoId
+          example: ['674eb3626bbc5c5e1e9ef63e', '67502ec864ab2f109cbff31e']
+        created_at:
+          type: string
+          format: ISO8601
+          example: 2024-12-07T07:58:12.439Z
+        updated_at:
+          type: string
+          format: ISO8601
+          example: 2024-12-07T09:09:35.764Z
+        location:
+          type: string
+          example: ''
+      required:
+        - _id
+        - username
+        - name
+        - email
+        - date_of_birth
+        - verify
+        - created_at
+        - updated_at
+    UserVerifyStatus:
+      type: number
+      enum:
+        - UserVerified
+        - Verified
+        - Banned
+      example: 1
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
